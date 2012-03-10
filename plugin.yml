@@ -1,15 +1,15 @@
-name: GetWolfOwner
-version: 1.4
-description: Get the owner of a wolf!
+name: GetPetOwner
+version: 1.0
+description: Get the owner of a pet!
 authors:
   - 1am3r
   - noroom
-website: http://1am3r.github.com/GetWolfOwner/
+website: http://1am3r.github.com/GetPetOwner/
 
-main: com.github._1am3r.GetWolfOwner.GetWolfOwner
+main: com.github._1am3r.GetPetOwner.GetPetOwner
 
 permissions:
-  getwolfowner.getowner:
-    description: Allows a player to get the name of the owner of a wolf
+  getpetowner.getowner:
+    description: Allows a player to get the name of the owner of a pet
     default: true
     
