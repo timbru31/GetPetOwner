@@ -37,35 +37,13 @@ public class GetPetOwner extends JavaPlugin implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-		if (event.getRightClicked() instanceof Tameable && event.getPlayer().hasPermission("getwolfowner.getowner")) {
-			if (event.getRightClicked() instanceof Wolf) {
-				Wolf clickedWolf = (Wolf) event.getRightClicked();
-				if (clickedWolf.isTamed()) {
-					AnimalTamer wolfOwner = clickedWolf.getOwner();
-					if (wolfOwner instanceof Player) {
-						Player owner = (Player) clickedWolf.getOwner();
-						if (!event.getPlayer().equals(owner)) {
-							event.getPlayer().sendMessage("§7The owner of this wolf is " + owner.getName() + ", Health: " + clickedWolf.getHealth());
-						}
-					} else if (wolfOwner instanceof OfflinePlayer) {
-						OfflinePlayer owner = (OfflinePlayer) clickedWolf.getOwner();
-						event.getPlayer().sendMessage("§7The owner of this wolf is " + owner.getName() + " (Offline)" + ", Health: " + clickedWolf.getHealth());
-					}
-				}
-			} else if (event.getRightClicked() instanceof Ocelot) {
-				Ocelot clickedCat = (Ocelot) event.getRightClicked();
-				if (clickedCat.isTamed()) {
-					AnimalTamer wolfOwner = clickedCat.getOwner();
-					if (wolfOwner instanceof Player) {
-						Player owner = (Player) clickedCat.getOwner();
-						if (!event.getPlayer().equals(owner)) {
-							event.getPlayer().sendMessage("§7The owner of this cat is " + owner.getName() + ", Health: " + clickedCat.getHealth());
-						}
-					} else if (wolfOwner instanceof OfflinePlayer) {
-						OfflinePlayer owner = (OfflinePlayer) clickedCat.getOwner();
-						event.getPlayer().sendMessage("§7The owner of this cat is " + owner.getName() + " (Offline)" + ", Health: " + clickedCat.getHealth());
-					}
+	public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+		if (e.getRightClicked() instanceof Tameable) {
+			if (((Tameable) e.getRightClicked()).isTamed()) {
+				AnimalTamer owner = ((Tameable) e.getRightClicked()).getOwner();
+				String ownerName = ((CraftPlayer) owner).getName();
+				if (!e.getPlayer().getName().equals(ownerName)) {
+					e.getPlayer().sendMessage(ChatColor.GRAY + "The owner of this animal is " + ownerName + "!");
 				}
 			}
 		}
